@@ -6,132 +6,148 @@
     <title>Admin - Naufal Studio Games</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/admin.css">
-    <style>
-        /* Media Query untuk Desktop & Mobile Layout */
-        @media (min-width: 768px) {
-            #admin-layout { flex-direction: row !important; height: 100vh; }
-            #sidebar { width: 220px !important; height: 100vh; overflow-y: auto; }
-            #content { width: calc(100% - 220px) !important; flex: 1; height: 100vh; overflow-y: auto; }
-        }
-        @media (max-width: 767px) {
-            #sidebar { display: flex; flex-direction: row; overflow-x: auto; align-items: center; padding: 10px; }
-            .sidebar-logo { margin-bottom: 0 !important; margin-right: 20px; }
-            .menu-item { border-bottom: 3px solid transparent; border-left: none !important; }
-        }
-    </style>
 </head>
-<body style="overflow-x:hidden; max-width:100vw; margin:0; padding:0;">
+<body>
 
-    <div id="login-section" class="login-container" style="max-width: 100vw; overflow-x: hidden;">
+    <div id="login-section" class="login-container">
         <div class="login-card">
-            <h2 style="color:var(--primary-purple);margin-bottom:20px;">Admin Login</h2>
-            <input type="text" id="admin-user" placeholder="Username" style="width:100%; box-sizing:border-box;">
-            <input type="password" id="admin-pass" placeholder="Password" style="width:100%; box-sizing:border-box;">
-            <button onclick="adminLogin()" style="width:100%; box-sizing:border-box;">Login</button>
-            <p style="margin-top:15px;font-size:0.8rem;"><a href="index.html" style="color:#a1a1aa;">Kembali ke Web</a></p>
+            <h2>Admin Login</h2>
+            <input type="text" id="admin-user" placeholder="Username">
+            <input type="password" id="admin-pass" placeholder="Password">
+            <button onclick="adminLogin()">Login</button>
+            <p><a href="index.html">Kembali ke Web</a></p>
         </div>
     </div>
 
-    <div id="admin-dashboard" style="display:none; width: 100%; max-width: 100vw;">
-        <div id="admin-layout" style="display:flex; flex-direction:column; width:100%;">
-            
-            <div id="sidebar" class="sidebar" style="width:100%;">
-                <div class="sidebar-logo">NSG Admin</div>
-                <div class="menu-item active" onclick="switchTab('dashboard')">Dashboard</div>
-                <div class="menu-item" onclick="switchTab('konfigurasi')">Konfigurasi</div>
-                <div class="menu-item" onclick="switchTab('kelola-admin')">Kelola Admin</div>
-                <div class="menu-item" onclick="switchTab('kelola-rank')">Kelola Rank</div>
-                <div class="menu-item" onclick="switchTab('kelola-mode')">Kelola Mode Joki</div>
-                <div class="menu-item" onclick="switchTab('kelola-paket')">Kelola Paket</div>
-                <div class="menu-item" onclick="switchTab('flash-sale')">Flash Sale</div>
-                <div class="menu-item" onclick="switchTab('banner')">Kelola Banner</div>
-                <div class="menu-item" onclick="switchTab('faq')">FAQ</div>
-                <div class="menu-item" onclick="switchTab('pesan-wa')">Pesan WA</div>
-                <div class="menu-item" style="color:#e11d48;" onclick="adminLogout()">Logout</div>
-            </div>
+    <div id="admin-dashboard" style="display:none;">
+        
+        <div id="sidebar" class="sidebar">
+            <div class="sidebar-logo">NSG Admin</div>
+            <div class="menu-item active" onclick="switchTab('dashboard')">Dashboard</div>
+            <div class="menu-item" onclick="switchTab('konfigurasi')">Konfigurasi</div>
+            <div class="menu-item" onclick="switchTab('kelola-admin')">Kelola Admin</div>
+            <div class="menu-item" onclick="switchTab('kelola-rank')">Kelola Rank</div>
+            <div class="menu-item" onclick="switchTab('kelola-mode')">Kelola Mode Joki</div>
+            <div class="menu-item" onclick="switchTab('kelola-paket')">Kelola Paket</div>
+            <div class="menu-item" onclick="switchTab('flash-sale')">Flash Sale</div>
+            <div class="menu-item" onclick="switchTab('banner')">Kelola Banner</div>
+            <div class="menu-item" onclick="switchTab('faq')">FAQ</div>
+            <div class="menu-item" onclick="switchTab('pesan-wa')">Pesan WA</div>
+            <div class="menu-item" onclick="adminLogout()">Logout</div>
+        </div>
 
-            <div id="content" class="main-content" style="width:100%; overflow-x:hidden; box-sizing:border-box;">
-                <div id="tab-dashboard" class="tab-content active">
-                    <h2>Dashboard Overview</h2>
-                    <div class="stat-grid">
-                        <div class="stat-card"><h3>Total Order</h3><div class="value">150</div></div>
-                        <div class="stat-card"><h3>Pending</h3><div class="value" style="color:#f97316;">12</div></div>
-                        <div class="stat-card"><h3>Selesai</h3><div class="value" style="color:#16a34a;">138</div></div>
-                        <div class="stat-card"><h3>Pendapatan</h3><div class="value">Rp 45.750k</div></div>
-                    </div>
-                    <h3>Order Terbaru</h3>
-                    <table style="width:100%; overflow-x:auto; display:block;">
+        <div id="content" class="main-content">
+            
+            <div id="tab-dashboard" class="tab-content active">
+                <h2>Dashboard Overview</h2>
+                <div class="stat-grid">
+                    <div class="stat-card"><h3>Total Order</h3><div class="value">150</div></div>
+                    <div class="stat-card"><h3>Pending</h3><div class="value">12</div></div>
+                    <div class="stat-card"><h3>Selesai</h3><div class="value">138</div></div>
+                    <div class="stat-card"><h3>Pendapatan</h3><div class="value">Rp 45.750k</div></div>
+                </div>
+                <h3>Order Terbaru</h3>
+                <div class="card-container">
+                    <table>
                         <thead><tr><th>ID Order</th><th>Nama</th><th>Paket</th><th>Harga</th><th>Status</th></tr></thead>
                         <tbody id="dashboard-table"></tbody>
                     </table>
                 </div>
+            </div>
 
-                <div id="tab-konfigurasi" class="tab-content">
-                    <h2>Konfigurasi Website</h2>
-                    <div class="form-group"><label>Nama Website</label><input type="text" id="conf-name" style="width:100%; box-sizing:border-box;"></div>
-                    <div class="form-group"><label>Nomor WhatsApp</label><input type="text" id="conf-wa" style="width:100%; box-sizing:border-box;"></div>
-                    <div class="form-group"><label>Instagram</label><input type="text" id="conf-ig" style="width:100%; box-sizing:border-box;"></div>
-                    <button class="btn-add" onclick="simpanKonfigurasi()">Simpan Konfigurasi</button>
+            <div id="tab-konfigurasi" class="tab-content">
+                <h2>Konfigurasi Website</h2>
+                <div class="form-group"><label>Nama Website</label><input type="text" id="conf-name"></div>
+                <div class="form-group"><label>Nomor WhatsApp</label><input type="text" id="conf-wa"></div>
+                <div class="form-group"><label>Instagram</label><input type="text" id="conf-ig"></div>
+                <button class="btn-add" onclick="simpanKonfigurasi()">Simpan Konfigurasi</button>
+            </div>
+
+            <div id="tab-kelola-admin" class="tab-content">
+                <h2>Kelola Admin</h2>
+                <p>Fitur ganti password admin akan segera hadir.</p>
+            </div>
+
+            <div id="tab-kelola-rank" class="tab-content">
+                <h2>Kelola Data Rank</h2>
+                <button class="btn-add" onclick="tambahRank()">+ Tambah Rank</button>
+                <div class="card-container">
+                    <table>
+                        <thead><tr><th>Nama Rank</th><th>Aksi</th></tr></thead>
+                        <tbody id="rank-table"></tbody>
+                    </table>
                 </div>
+            </div>
 
-                <div id="tab-kelola-admin" class="tab-content">
-                    <h2>Kelola Admin</h2>
-                    <p>Fitur ganti password admin akan segera hadir.</p>
+            <div id="tab-kelola-mode" class="tab-content">
+                <h2>Kelola Mode Joki</h2>
+                <button class="btn-add" onclick="tambahMode()">+ Tambah Mode</button>
+                <div class="card-container">
+                    <table>
+                        <thead><tr><th>Mode</th><th>Aksi</th></tr></thead>
+                        <tbody id="mode-table"></tbody>
+                    </table>
                 </div>
+            </div>
 
-                <div id="tab-kelola-rank" class="tab-content">
-                    <h2>Kelola Data Rank</h2>
-                    <button class="btn-add" onclick="tambahRank()">+ Tambah Rank</button>
-                    <table style="width:100%; overflow-x:auto; display:block;"><thead><tr><th>Nama Rank</th><th>Aksi</th></tr></thead><tbody id="rank-table"></tbody></table>
-                </div>
-
-                <div id="tab-kelola-mode" class="tab-content">
-                    <h2>Kelola Mode Joki</h2>
-                    <button class="btn-add" onclick="tambahMode()">+ Tambah Mode</button>
-                    <table style="width:100%; overflow-x:auto; display:block;"><thead><tr><th>Mode</th><th>Aksi</th></tr></thead><tbody id="mode-table"></tbody></table>
-                </div>
-
-                <div id="tab-kelola-paket" class="tab-content">
-                    <h2>Kelola Paket Joki</h2>
-                    <button class="btn-add" onclick="openModalTambahPaket()">+ Tambah Paket</button>
-                    <table style="width:100%; overflow-x:auto; display:block;">
+            <div id="tab-kelola-paket" class="tab-content">
+                <h2>Kelola Paket Joki</h2>
+                <button class="btn-add" onclick="openModalTambahPaket()">+ Tambah Paket</button>
+                <div class="card-container">
+                    <table>
                         <thead><tr><th>ID</th><th>Nama Paket</th><th>Harga</th><th>Status</th><th>Aksi</th></tr></thead>
                         <tbody id="paket-table"></tbody>
                     </table>
                 </div>
+            </div>
 
-                <div id="tab-flash-sale" class="tab-content">
-                    <h2>Flash Sale</h2>
-                    <div style="margin-bottom:15px;">
-                        <label>Status Flash Sale: </label>
-                        <label class="toggle-switch"><input type="checkbox" checked><span class="slider"></span></label>
-                    </div>
-                    <div class="form-group"><label>Waktu Berakhir</label><input type="datetime-local" style="width:100%; box-sizing:border-box;"></div>
-                    <button class="btn-add" onclick="tambahItemFlashSale()">+ Tambah Item</button>
-                    <table style="width:100%; overflow-x:auto; display:block;"><thead><tr><th>Nama Item</th><th>Harga Asli</th><th>Harga Diskon</th><th>Aksi</th></tr></thead><tbody id="fs-table"></tbody></table>
+            <div id="tab-flash-sale" class="tab-content">
+                <h2>Flash Sale</h2>
+                <div class="form-group">
+                    <label>Status Flash Sale: </label>
+                    <label class="toggle-switch"><input type="checkbox" checked><span class="slider"></span></label>
                 </div>
-
-                <div id="tab-banner" class="tab-content">
-                    <h2>Kelola Banner</h2>
-                    <button class="btn-add" onclick="tambahBanner()">+ Tambah Banner</button>
-                    <table style="width:100%; overflow-x:auto; display:block;"><thead><tr><th>Nama Banner</th><th>Aksi</th></tr></thead><tbody id="banner-table"></tbody></table>
-                </div>
-
-                <div id="tab-faq" class="tab-content">
-                    <h2>Kelola FAQ</h2>
-                    <button class="btn-add" onclick="openModalTambahFaq()">+ Tambah FAQ</button>
-                    <table style="width:100%; overflow-x:auto; display:block;"><thead><tr><th>Pertanyaan</th><th>Jawaban</th><th>Aksi</th></tr></thead><tbody id="faq-table"></tbody></table>
-                </div>
-
-                <div id="tab-pesan-wa" class="tab-content">
-                    <h2>Template Pesan WhatsApp</h2>
-                    <div class="form-group">
-                        <label>Template (Gunakan [PAKET] dan [ID_GAME])</label>
-                        <textarea rows="5" style="width:100%; box-sizing:border-box;">Halo Admin, saya ingin order [PAKET] untuk akun [ID_GAME]. Mohon konfirmasi pembayaran saya.</textarea>
-                    </div>
-                    <button class="btn-add" onclick="simpanPesanWA()">Simpan Template</button>
+                <div class="form-group"><label>Waktu Berakhir</label><input type="datetime-local"></div>
+                <button class="btn-add" onclick="tambahItemFlashSale()">+ Tambah Item</button>
+                <div class="card-container">
+                    <table>
+                        <thead><tr><th>Nama Item</th><th>Harga Asli</th><th>Harga Diskon</th><th>Aksi</th></tr></thead>
+                        <tbody id="fs-table"></tbody>
+                    </table>
                 </div>
             </div>
+
+            <div id="tab-banner" class="tab-content">
+                <h2>Kelola Banner</h2>
+                <button class="btn-add" onclick="tambahBanner()">+ Tambah Banner</button>
+                <div class="card-container">
+                    <table>
+                        <thead><tr><th>Nama Banner</th><th>Aksi</th></tr></thead>
+                        <tbody id="banner-table"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="tab-faq" class="tab-content">
+                <h2>Kelola FAQ</h2>
+                <button class="btn-add" onclick="openModalTambahFaq()">+ Tambah FAQ</button>
+                <div class="card-container">
+                    <table>
+                        <thead><tr><th>Pertanyaan</th><th>Jawaban</th><th>Aksi</th></tr></thead>
+                        <tbody id="faq-table"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="tab-pesan-wa" class="tab-content">
+                <h2>Template Pesan WhatsApp</h2>
+                <div class="form-group">
+                    <label>Template (Gunakan [PAKET] dan [ID_GAME])</label>
+                    <textarea rows="5">Halo Admin, saya ingin order [PAKET] untuk akun [ID_GAME]. Mohon konfirmasi pembayaran saya.</textarea>
+                </div>
+                <button class="btn-add" onclick="simpanPesanWA()">Simpan Template</button>
+            </div>
+
         </div>
     </div>
 
@@ -139,13 +155,13 @@
         <div class="modal-box">
             <h3>Form Paket</h3>
             <form id="form-paket" onsubmit="event.preventDefault(); simpanPaket();">
-                <input type="hidden" id="paket-id" style="width:100%; box-sizing:border-box;">
-                <input type="text" id="paket-nama" placeholder="Nama Paket" required style="width:100%; box-sizing:border-box;">
-                <input type="number" id="paket-harga" placeholder="Harga" required style="width:100%; box-sizing:border-box;">
-                <input type="text" id="paket-desc" placeholder="Deskripsi" required style="width:100%; box-sizing:border-box;">
+                <input type="hidden" id="paket-id">
+                <input type="text" id="paket-nama" placeholder="Nama Paket" required>
+                <input type="number" id="paket-harga" placeholder="Harga" required>
+                <input type="text" id="paket-desc" placeholder="Deskripsi" required>
                 <div class="btn-row">
                     <button type="button" class="btn-cancel" onclick="hideModal('modal-paket')">Batal</button>
-                    <button type="submit" class="btn-add" style="margin:0;">Simpan</button>
+                    <button type="submit" class="btn-add">Simpan</button>
                 </div>
             </form>
         </div>
@@ -155,11 +171,11 @@
         <div class="modal-box">
             <h3>Form FAQ</h3>
             <form id="form-faq" onsubmit="event.preventDefault(); simpanFaq();">
-                <input type="text" id="faq-q" placeholder="Pertanyaan" required style="width:100%; box-sizing:border-box;">
-                <textarea id="faq-a" placeholder="Jawaban" required style="width:100%; box-sizing:border-box;"></textarea>
+                <input type="text" id="faq-q" placeholder="Pertanyaan" required>
+                <textarea id="faq-a" placeholder="Jawaban" required></textarea>
                 <div class="btn-row">
                     <button type="button" class="btn-cancel" onclick="hideModal('modal-faq')">Batal</button>
-                    <button type="submit" class="btn-add" style="margin:0;">Simpan</button>
+                    <button type="submit" class="btn-add">Simpan</button>
                 </div>
             </form>
         </div>
