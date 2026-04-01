@@ -3,756 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naufal Studio Games</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-main: #0a0a1a;
-            --primary: #7c3aed;
-            --secondary: #4f46e5;
-            --card-bg: #1a1a2e;
-            --border-color: #7c3aed30;
-            --text-main: #ffffff;
-            --text-muted: #a1a1aa;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Particles Background */
-        .particles-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 85% 30%, rgba(79, 70, 229, 0.08) 0%, transparent 50%);
-            z-index: -1;
-        }
-
-        /* Utilities */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .hidden { display: none !important; }
-        .text-center { text-align: center; }
-        .text-primary { color: var(--primary); }
-        .text-muted { color: var(--text-muted); }
-        .mt-4 { margin-top: 1rem; } .mb-4 { margin-bottom: 1rem; } .mb-8 { margin-bottom: 2rem; }
-        .flex { display: flex; } .grid { display: grid; }
-        .gap-4 { gap: 1rem; } .gap-6 { gap: 1.5rem; }
-
-        /* Buttons */
-        .btn {
-            padding: 12px 24px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
-        }
-        .btn-primary:hover { box-shadow: 0 0 20px rgba(124, 58, 237, 0.8); transform: translateY(-2px); }
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: white;
-        }
-        .btn-outline:hover { background: rgba(124, 58, 237, 0.1); box-shadow: 0 0 15px rgba(124, 58, 237, 0.5); }
-
-        /* Cards & Inputs */
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-            transition: all 0.3s ease;
-        }
-        .card:hover { border-color: var(--primary); box-shadow: 0 0 20px rgba(124, 58, 237, 0.2); }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 16px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: white;
-            margin-bottom: 16px;
-            outline: none;
-            transition: 0.3s;
-        }
-        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(124, 58, 237, 0.5); }
-
-        /* Navbar */
-        nav {
-            position: fixed; top: 0; width: 100%;
-            background: rgba(10, 10, 26, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 100;
-            padding: 15px 0;
-        }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 20px; font-weight: 800; display: flex; align-items: center; gap: 8px; cursor: pointer; }
-        .nav-links { display: flex; gap: 24px; align-items: center; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; cursor: pointer; transition: 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
-
-        /* Layouts */
-        .page-view { padding: 100px 0 60px; min-height: 85vh; }
-        .grid-2 { grid-template-columns: repeat(2, 1fr); }
-        .grid-3 { grid-template-columns: repeat(3, 1fr); }
-        .grid-4 { grid-template-columns: repeat(4, 1fr); }
-
-        /* Hero */
-        .hero { text-align: center; padding: 80px 0; }
-        .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
-        .hero p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px; }
-
-        /* Flash Sale */
-        .badge-sale { background: #ff4757; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; position: absolute; top: 10px; right: 10px; }
-        .fs-timer { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-shadow: 0 0 10px var(--primary); }
-
-        /* Selectable Grids (Order Form) */
-        .select-box { background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; text-align: center; cursor: pointer; transition: 0.3s; font-weight: 600; font-size: 0.9rem; }
-        .select-box:hover { border-color: var(--primary); background: rgba(124,58,237,0.1); }
-        .select-box.active { border-color: var(--primary); background: rgba(124,58,237,0.2); box-shadow: 0 0 15px rgba(124,58,237,0.5); }
-
-        /* Progress Bar */
-        .progress-container { display: flex; justify-content: space-between; margin-bottom: 30px; position: relative; }
-        .progress-container::before { content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: var(--border-color); z-index: -1; }
-        .step-circle { width: 35px; height: 35px; border-radius: 50%; background: var(--card-bg); border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--text-muted); transition: 0.3s; }
-        .step-circle.active { border-color: var(--primary); background: var(--primary); color: white; box-shadow: 0 0 15px var(--primary); }
-
-        /* Admin Table */
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border-color); }
-        th { color: var(--primary); font-weight: 600; }
-        
-        /* Popup */
-        .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-        .popup-content { background: var(--card-bg); border: 1px solid var(--primary); padding: 40px; border-radius: 12px; text-align: center; max-width: 400px; box-shadow: 0 0 30px rgba(124,58,237,0.4); }
-
-        /* Footer */
-        footer { border-top: 1px solid var(--border-color); padding: 40px 0 20px; text-align: center; background: #05050f; }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.2rem; }
-            .admin-layout { flex-direction: column; }
-            .admin-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); }
-        }
-    </style>
+    <title>Naufal Studio Games - Joki ML</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-    <div class="particles-bg"></div>
-
-    <nav id="navbar">
-        <div class="container nav-container">
-            <div class="logo" onclick="showPage('home')">
-                🎮 Naufal Studio Games
-            </div>
-            <div class="nav-links">
-                <a onclick="showPage('home')">Home</a>
-                <a onclick="showPage('kalkulator')">Kalkulator</a>
-                <a onclick="showPage('cek-order')">Cek Order</a>
-                <a onclick="showPage('panduan')">Panduan</a>
-                <a onclick="showPage('syarat')">Syarat</a>
-                <a href="#" class="btn btn-primary" style="padding: 8px 16px;">Kontak Kami</a>
-            </div>
-        </div>
+    <nav class="navbar glass">
+        <div class="logo">NSG Joki</div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="showSection('hero')">Home</a></li>
+            <li><a href="#" onclick="showSection('paket')">Paket</a></li>
+            <li><a href="#" onclick="showSection('cara-order')">Cara Order</a></li>
+            <li><a href="#" onclick="showSection('kalkulator')">Kalkulator</a></li>
+            <li><a href="#" onclick="showSection('cek-order')">Cek Order</a></li>
+        </ul>
     </nav>
 
-    <div id="app">
-
-        <div id="page-home" class="page-view container">
-            <div class="hero">
-                <h1>Upgrade Rank ML Kamu Sekarang!</h1>
-                <p>Solusi Joki Mobile Legends terpercaya, murah, dan 100% aman oleh Pro Player.</p>
-                <div class="flex gap-4" style="justify-content: center;">
-                    <button class="btn btn-primary" onclick="showPage('order')">Order Sekarang</button>
-                    <button class="btn btn-outline" onclick="showPage('cek-order')">Cek Order</button>
-                </div>
+    <main id="main-content">
+        <section id="hero" class="hero-section fade-in">
+            <canvas id="particles"></canvas>
+            <div class="hero-content glass">
+                <h1>Joki Mobile Legends Terpercaya</h1>
+                <p>Naikkan rank dengan cepat dan aman bersama worker profesional kami.</p>
+                <button class="btn-primary glow" onclick="showSection('order-form')">Order Sekarang</button>
             </div>
+        </section>
 
-            <div class="card mb-8" style="background: linear-gradient(90deg, #1a1a2e 0%, rgba(124,58,237,0.1) 100%); border-left: 4px solid var(--primary);">
-                <div class="flex" style="justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h2 class="text-primary">⚡ FLASH SALE</h2>
-                    <div class="fs-timer" id="timer">23:59:59</div>
-                </div>
-                <div class="grid grid-3 gap-6" id="flash-sale-container">
-                    </div>
+        <section id="flash-sale" class="fade-in">
+            <div class="section-title">
+                <h2>⚡ Flash Sale ⚡</h2>
+                <div id="countdown" class="glow-text">24:00:00</div>
             </div>
+            <div id="flash-sale-list" class="grid-container"></div>
+        </section>
 
-            <h2 class="mb-4 text-center">🏆 Daftar Paket Joki</h2>
-            <div class="grid grid-4 gap-6 mb-8" id="package-container">
-                </div>
+        <section id="paket" class="fade-in">
+            <h2>Pilihan Paket</h2>
+            <div id="paket-list" class="grid-container"></div>
+        </section>
 
-            <h2 class="mb-4 text-center mt-4">Mengapa Memilih Kami?</h2>
-            <div class="grid grid-3 gap-6 mb-8">
-                <div class="card text-center">
-                    <h3 class="text-primary mb-2">💰 Penawaran Terbaik</h3>
-                    <p class="text-muted">Harga termurah se-Indonesia dengan jaminan kualitas.</p>
-                </div>
-                <div class="card text-center">
-                    <h3 class="text-primary mb-2">🛡️ Transaksi Aman</h3>
-                    <p class="text-muted">Proses manual tanpa cheat/bot. 100% Anti Banned.</p>
-                </div>
-                <div class="card text-center">
-                    <h3 class="text-primary mb-2">⏱️ Layanan 24 Jam</h3>
-                    <p class="text-muted">Admin dan worker siap melayani kapan saja.</p>
-                </div>
+        <section id="kenapa-kami" class="fade-in">
+            <h2>Kenapa Memilih Kami?</h2>
+            <div class="grid-container">
+                <div class="card glass">Proses Cepat & Aman</div>
+                <div class="card glass">Worker Profesional (Mythical Glory)</div>
+                <div class="card glass">Garansi Uang Kembali</div>
             </div>
+        </section>
 
-            <div class="card mb-8">
-                <h2 class="text-center mb-6">3 Langkah Mudah Order</h2>
-                <div class="grid grid-3 gap-6 text-center">
-                    <div>
-                        <div style="font-size: 2rem; color: var(--primary); font-weight: bold;">1</div>
-                        <h3>Pilih Paket</h3><p class="text-muted">Tentukan target joki kamu</p>
-                    </div>
-                    <div>
-                        <div style="font-size: 2rem; color: var(--primary); font-weight: bold;">2</div>
-                        <h3>Bayar</h3><p class="text-muted">Pilih metode pembayaran</p>
-                    </div>
-                    <div>
-                        <div style="font-size: 2rem; color: var(--primary); font-weight: bold;">3</div>
-                        <h3>Proses Instan</h3><p class="text-muted">Worker segera login & main</p>
-                    </div>
-                </div>
+        <section id="cara-order" class="fade-in">
+            <h2>Cara Order</h2>
+            <div class="steps-container">
+                <div class="step-card glass">1. Pilih Paket & Isi Data</div>
+                <div class="step-card glass">2. Lakukan Pembayaran</div>
+                <div class="step-card glass">3. Worker Memproses Orderan</div>
             </div>
-        </div>
+        </section>
 
-        <div id="page-order" class="page-view container hidden">
-            <div style="max-width: 800px; margin: 0 auto;">
-                <h1 class="text-center mb-8">Formulir Pemesanan</h1>
+        <section id="order-form" class="fade-in" style="display:none;">
+            <h2>Form Order</h2>
+            <div class="form-container glass">
+                <div class="progress-bar">
+                    <div id="progress" class="progress-fill"></div>
+                </div>
                 
-                <div class="progress-container">
-                    <div class="step-circle active" id="prog-1">1</div>
-                    <div class="step-circle" id="prog-2">2</div>
-                    <div class="step-circle" id="prog-3">3</div>
-                    <div class="step-circle" id="prog-4">4</div>
+                <div id="step-1" class="form-step active">
+                    <h3>Step 1: Data Akun</h3>
+                    <input type="text" id="game-id" placeholder="ID Game (Server)">
+                    <input type="email" id="email" placeholder="Email Akun">
+                    <input type="password" id="password" placeholder="Password Akun">
+                    <input type="text" id="hero" placeholder="Request Hero (Opsional)">
+                    <select id="login-via">
+                        <option>Moonton</option>
+                        <option>Facebook</option>
+                        <option>VK</option>
+                        <option>TikTok</option>
+                    </select>
+                    <button class="btn-primary" onclick="nextStep()">Lanjut</button>
                 </div>
 
-                <div class="card">
-                    <div id="order-step-1">
-                        <h3 class="mb-4 text-primary">1. Masukkan Data Akun</h3>
-                        <input type="text" class="form-control" placeholder="ID Game (Server)">
-                        <input type="email" class="form-control" placeholder="Email Akun">
-                        <input type="password" class="form-control" placeholder="Password Akun">
-                        <input type="text" class="form-control" placeholder="Request Hero (Minimal 3 Hero)">
-                        
-                        <p class="text-muted mb-2 mt-4">Login Via:</p>
-                        <div class="grid grid-3 gap-4 mb-6 text-center">
-                            <div class="select-box login-opt" style="border-color: #1877f2;" onclick="setOrderOpt('login', this)">Facebook</div>
-                            <div class="select-box login-opt" style="border-color: #2787f5;" onclick="setOrderOpt('login', this)">VK</div>
-                            <div class="select-box login-opt" style="border-color: #444;" onclick="setOrderOpt('login', this)">Moonton</div>
-                        </div>
-                        <button class="btn btn-primary" style="width: 100%;" onclick="nextStep(2)">Lanjut Pilih Rank</button>
-                    </div>
+                <div id="step-2" class="form-step" style="display:none;">
+                    <h3>Step 2: Pilih Rank / Bintang</h3>
+                    <div id="rank-grid" class="grid-container small-grid"></div>
+                    <input type="number" id="jumlah-bintang" placeholder="Jumlah Bintang/Match">
+                    <button class="btn-secondary" onclick="prevStep()">Kembali</button>
+                    <button class="btn-primary" onclick="nextStep()">Lanjut</button>
+                </div>
 
-                    <div id="order-step-2" class="hidden">
-                        <h3 class="mb-4 text-primary">2. Pilih Target Rank</h3>
-                        <div class="grid grid-3 gap-4 mb-4">
-                            <div class="select-box rank-opt" onclick="setOrderOpt('rank', this)">Master IV</div>
-                            <div class="select-box rank-opt" onclick="setOrderOpt('rank', this)">Grandmaster V</div>
-                            <div class="select-box rank-opt" onclick="setOrderOpt('rank', this)">Epic V</div>
-                            <div class="select-box rank-opt" onclick="setOrderOpt('rank', this)">Legend V</div>
-                            <div class="select-box rank-opt" onclick="setOrderOpt('rank', this)">Mythic V</div>
-                            <div class="select-box rank-opt" onclick="setOrderOpt('rank', this)">Mythic Full Grading</div>
-                        </div>
-                        <input type="number" class="form-control mb-6" placeholder="Jumlah Bintang (Opsional)">
-                        
-                        <div class="flex gap-4">
-                            <button class="btn btn-outline" style="width: 50%;" onclick="nextStep(1)">Kembali</button>
-                            <button class="btn btn-primary" style="width: 50%;" onclick="nextStep(3)">Lanjut Pembayaran</button>
-                        </div>
-                    </div>
+                <div id="step-3" class="form-step" style="display:none;">
+                    <h3>Step 3: Pembayaran</h3>
+                    <div id="payment-grid" class="grid-container small-grid"></div>
+                    <button class="btn-secondary" onclick="prevStep()">Kembali</button>
+                    <button class="btn-primary" onclick="nextStep()">Lanjut</button>
+                </div>
 
-                    <div id="order-step-3" class="hidden">
-                        <h3 class="mb-4 text-primary">3. Metode Pembayaran</h3>
-                        <div class="grid grid-4 gap-4 mb-6">
-                            <div class="select-box pay-opt" style="color: #ed1c24; border-color: #ed1c24;" onclick="setOrderOpt('pay', this)">Alfamart</div>
-                            <div class="select-box pay-opt" style="color: #005baa; border-color: #005baa;" onclick="setOrderOpt('pay', this)">Indomaret</div>
-                            <div class="select-box pay-opt" style="color: #ed1b24; border-color: #ed1b24;" onclick="setOrderOpt('pay', this)">QRIS</div>
-                            <div class="select-box pay-opt" style="color: #118ee9; border-color: #118ee9;" onclick="setOrderOpt('pay', this)">DANA</div>
-                            <div class="select-box pay-opt" style="color: #00a550; border-color: #00a550;" onclick="setOrderOpt('pay', this)">GOPAY</div>
-                            <div class="select-box pay-opt" style="color: #4c2a86; border-color: #4c2a86;" onclick="setOrderOpt('pay', this)">OVO</div>
-                            <div class="select-box pay-opt" style="color: #f15a23; border-color: #f15a23;" onclick="setOrderOpt('pay', this)">BNI VA</div>
-                            <div class="select-box pay-opt" style="color: #0066ae; border-color: #0066ae;" onclick="setOrderOpt('pay', this)">BCA VA</div>
-                        </div>
-                        <div class="flex gap-4">
-                            <button class="btn btn-outline" style="width: 50%;" onclick="nextStep(2)">Kembali</button>
-                            <button class="btn btn-primary" style="width: 50%;" onclick="nextStep(4)">Lanjut Kontak</button>
-                        </div>
-                    </div>
-
-                    <div id="order-step-4" class="hidden">
-                        <h3 class="mb-4 text-primary">4. Informasi Kontak</h3>
-                        <input type="text" class="form-control" placeholder="Nomor WhatsApp">
-                        <input type="email" class="form-control mb-6" placeholder="Alamat Email Invoice">
-                        
-                        <div class="flex gap-4">
-                            <button class="btn btn-outline" style="width: 50%;" onclick="nextStep(3)">Kembali</button>
-                            <button class="btn btn-primary" style="width: 50%;" onclick="submitOrder()">Pesan Sekarang</button>
-                        </div>
-                    </div>
+                <div id="step-4" class="form-step" style="display:none;">
+                    <h3>Step 4: Kontak</h3>
+                    <input type="text" id="whatsapp" placeholder="Nomor WhatsApp">
+                    <input type="email" id="email-konfirmasi" placeholder="Email Konfirmasi">
+                    <button class="btn-secondary" onclick="prevStep()">Kembali</button>
+                    <button class="btn-primary glow" onclick="submitOrder()">Order Sekarang</button>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div id="page-kalkulator" class="page-view container hidden">
-            <div class="card" style="max-width: 500px; margin: 0 auto;">
-                <h2 class="text-center text-primary mb-6">Kalkulator Win Rate</h2>
-                <label class="text-muted">Total Match Saat Ini</label>
-                <input type="number" id="calc-match" class="form-control">
-                <label class="text-muted">Total WR Saat Ini (%)</label>
-                <input type="number" id="calc-wr" class="form-control" step="0.1">
-                <label class="text-muted">Target WR (%)</label>
-                <input type="number" id="calc-target" class="form-control" step="0.1">
-                
-                <button class="btn btn-primary mt-4" style="width: 100%;" onclick="hitungWR()">Hitung</button>
-
-                <div id="calc-result" class="mt-4 hidden p-4" style="background: rgba(124,58,237,0.2); border: 1px solid var(--primary); border-radius: 8px; text-align: center; font-weight: bold;">
-                </div>
+        <section id="kalkulator" class="fade-in">
+            <h2>Kalkulator Win Rate</h2>
+            <div class="form-container glass">
+                <input type="number" id="total-match" placeholder="Total Match Saat Ini">
+                <input type="number" id="current-wr" placeholder="Win Rate Saat Ini (%)">
+                <input type="number" id="target-wr" placeholder="Target Win Rate (%)">
+                <button class="btn-primary" onclick="hitungKalkulator()">Hitung</button>
+                <div id="hasil-kalkulator" class="result-box"></div>
             </div>
-        </div>
+        </section>
 
-        <div id="page-cek-order" class="page-view container hidden">
-            <div class="card" style="max-width: 500px; margin: 0 auto; text-align: center;">
-                <h2 class="text-primary mb-6">Lacak Pesanan Kamu</h2>
-                <input type="text" id="cek-id" class="form-control text-center" placeholder="Masukkan Order ID (Contoh: NSG-0001)">
-                <button class="btn btn-primary" style="width: 100%;" onclick="cekStatusOrder()">Cek Status</button>
-                
-                <div id="cek-result" class="mt-6 hidden text-left" style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);">
-                </div>
+        <section id="cek-order" class="fade-in">
+            <h2>Cek Status Order</h2>
+            <div class="form-container glass">
+                <input type="text" id="order-id-input" placeholder="Masukkan ID Order (Contoh: NSG-0001)">
+                <button class="btn-primary" onclick="cekOrder()">Cek Order</button>
+                <div id="hasil-cek" class="result-box"></div>
             </div>
-        </div>
+        </section>
 
-        <div id="page-panduan" class="page-view container hidden">
-            <div class="card" style="max-width: 800px; margin: 0 auto;">
-                <h2 class="text-primary mb-6 border-b pb-2">Panduan Cara Order</h2>
-                <div style="display: flex; flex-direction: column; gap: 20px;">
-                    <div><strong class="text-primary">1. Pilih Layanan:</strong> Tentukan paket joki yang kamu inginkan di halaman Home.</div>
-                    <div><strong class="text-primary">2. Isi Data Akun:</strong> Lengkapi form ID Game, Email, Password, dan pilih metode login dengan benar.</div>
-                    <div><strong class="text-primary">3. Tentukan Target:</strong> Pilih rank tujuan atau masukkan jumlah bintang yang ingin diraih.</div>
-                    <div><strong class="text-primary">4. Pembayaran:</strong> Pilih metode pembayaran yang tersedia dan selesaikan transaksi sesuai instruksi.</div>
-                    <div><strong class="text-primary">5. Proses Joki:</strong> Worker kami akan segera login dan memproses pesananmu. Cek status berkala di menu Cek Order.</div>
-                </div>
+        <section id="panduan" class="fade-in">
+            <h2>Panduan & FAQ</h2>
+            <div id="faq-list" class="grid-container"></div>
+        </section>
+
+        <section id="syarat" class="fade-in">
+            <h2>Syarat & Ketentuan</h2>
+            <div class="glass p-4 text-muted">
+                <p>1. Dilarang login selama proses joki berlangsung.</p>
+                <p>2. Jika menabrak login, garansi hangus.</p>
+                <p>3. Pembayaran tidak dapat di-refund setelah proses dimulai.</p>
             </div>
-        </div>
+        </section>
+    </main>
 
-        <div id="page-syarat" class="page-view container hidden">
-            <div class="card" style="max-width: 800px; margin: 0 auto;">
-                <h2 class="text-primary mb-6 border-b pb-2">Syarat & Ketentuan</h2>
-                <ol style="margin-left: 20px; color: var(--text-muted); display: flex; flex-direction: column; gap: 15px;">
-                    <li>Data akun yang diberikan harus valid dan benar.</li>
-                    <li>Pembeli dilarang login (menabrak) akun selama proses joki berlangsung.</li>
-                    <li>Jika terjadi tabrak login lebih dari 3 kali, order dianggap selesai tanpa refund.</li>
-                    <li>Matikan verifikasi 2 langkah untuk mempercepat proses login worker.</li>
-                    <li>Waktu pengerjaan bergantung pada jumlah antrean dan kesulitan tier.</li>
-                    <li>Joki dilakukan 100% murni oleh Pro Player tanpa script/cheat.</li>
-                    <li>Segala bentuk perubahan password setelah joki selesai adalah tanggung jawab pembeli.</li>
-                    <li>Refund hanya berlaku jika kesalahan murni dari pihak Naufal Studio Games.</li>
-                    <li>Request hero wajib mengisi minimal 3 pilihan hero yang berbeda role.</li>
-                    <li>Dengan melakukan pemesanan, pembeli dianggap telah membaca dan menyetujui seluruh syarat ini.</li>
-                </ol>
-            </div>
-        </div>
+    <footer class="glass">
+        <p>&copy; 2026 Naufal Studio Games. All Rights Reserved.</p>
+    </footer>
 
-        <footer id="footer">
-            <div class="container">
-                <h2 class="text-primary mb-2">Naufal Studio Games</h2>
-                <p class="text-muted mb-4">Top Up & Joki Terpercaya 100% Aman</p>
-                <div class="flex gap-4" style="justify-content: center; margin-bottom: 20px;">
-                    <a href="#" style="color: white; text-decoration: none;">WhatsApp</a>
-                    <a href="#" style="color: white; text-decoration: none;">Instagram</a>
-                </div>
-                <p class="text-muted" style="font-size: 0.9rem;" ondblclick="showAdminLogin()">
-                    &copy; 2024 Naufal Studio Games. All Rights Reserved.
-                </p>
-            </div>
-        </footer>
-
-    </div> <div id="admin-login-page" class="hidden" style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
-        <div class="card" style="width: 100%; max-width: 400px; text-align: center;">
-            <h2 class="text-primary mb-6">Admin Panel Login</h2>
-            <input type="text" id="adm-user" class="form-control" placeholder="Username (admin)">
-            <input type="password" id="adm-pass" class="form-control" placeholder="Password (admin123)">
-            <button class="btn btn-primary" style="width: 100%;" onclick="doAdminLogin()">Login</button>
-            <p id="adm-err" class="mt-4 hidden" style="color: #ff4757; font-weight: bold;">Username / Password Salah!</p>
-            <p class="mt-4 text-muted cursor-pointer" style="cursor: pointer; text-decoration: underline;" onclick="showPage('home')">Kembali ke Home</p>
+    <div id="success-modal" class="modal glass" style="display:none;">
+        <div class="modal-content glass">
+            <h3>🎉 Order Berhasil!</h3>
+            <p id="success-message"></p>
+            <button class="btn-primary" onclick="closeModal()">Tutup</button>
         </div>
     </div>
 
-    <div id="admin-dashboard-page" class="hidden">
-        <div class="flex admin-layout" style="min-height: 100vh;">
-            <div class="admin-sidebar" style="width: 250px; background: var(--card-bg); border-right: 1px solid var(--border-color); padding: 20px;">
-                <h2 class="text-primary mb-8 text-center">Admin Panel</h2>
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <button class="btn btn-outline" style="text-align: left; border-color: transparent;" onclick="switchAdminTab('dash')">Dashboard</button>
-                    <button class="btn btn-outline" style="text-align: left; border-color: transparent;" onclick="switchAdminTab('paket')">Kelola Paket</button>
-                    <button class="btn btn-outline" style="text-align: left; border-color: transparent;" onclick="switchAdminTab('flash')">Flash Sale</button>
-                    <button class="btn btn-outline" style="text-align: left; border-color: transparent;" onclick="switchAdminTab('banner')">Kelola Banner</button>
-                    <button class="btn btn-outline" style="text-align: left; border-color: transparent;" onclick="switchAdminTab('faq')">FAQ</button>
-                    <button class="btn btn-outline" style="text-align: left; border-color: transparent;" onclick="switchAdminTab('wa')">Pesan WA</button>
-                    <button class="btn" style="text-align: left; background: #ff4757; color: white; margin-top: 20px;" onclick="adminLogout()">Logout</button>
-                </div>
-            </div>
+    <button id="btn-admin-float" class="glow" onclick="window.location.href='admin.html'">⚙️ Admin</button>
 
-            <div style="flex: 1; padding: 30px; overflow-y: auto;">
-                
-                <div id="adm-tab-dash">
-                    <h1 class="mb-6">Dashboard Overview</h1>
-                    <div class="grid grid-4 gap-4 mb-8">
-                        <div class="card text-center">
-                            <h3 class="text-muted">Total Order</h3><p style="font-size: 2rem; font-weight: bold;">150</p>
-                        </div>
-                        <div class="card text-center">
-                            <h3 class="text-muted">Pending</h3><p style="font-size: 2rem; font-weight: bold; color: #f39c12;">12</p>
-                        </div>
-                        <div class="card text-center">
-                            <h3 class="text-muted">Selesai</h3><p style="font-size: 2rem; font-weight: bold; color: #2ecc71;">138</p>
-                        </div>
-                        <div class="card text-center">
-                            <h3 class="text-muted">Pendapatan</h3><p style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">Rp 45.750.000</p>
-                        </div>
-                    </div>
-
-                    <h2 class="mb-4">5 Order Terbaru</h2>
-                    <div class="card">
-                        <table>
-                            <tr><th>ID</th><th>Nama Paket</th><th>Status</th><th>Aksi</th></tr>
-                            <tr><td>NSG-0001</td><td>Perpaket Legend</td><td style="color: #f39c12;">Pending</td><td><button class="btn btn-outline" style="padding: 5px 10px;">Proses</button></td></tr>
-                            <tr><td>NSG-0002</td><td>Classic Up WR</td><td style="color: #2ecc71;">Selesai</td><td><button class="btn btn-outline" style="padding: 5px 10px;">Detail</button></td></tr>
-                            <tr><td>NSG-0003</td><td>Perbintang Epic</td><td style="color: #2ecc71;">Selesai</td><td><button class="btn btn-outline" style="padding: 5px 10px;">Detail</button></td></tr>
-                            <tr><td>NSG-0004</td><td>MCL</td><td style="color: #2ecc71;">Selesai</td><td><button class="btn btn-outline" style="padding: 5px 10px;">Detail</button></td></tr>
-                            <tr><td>NSG-0005</td><td>Mythic Grading</td><td style="color: #3498db;">Diproses</td><td><button class="btn btn-outline" style="padding: 5px 10px;">Detail</button></td></tr>
-                        </table>
-                    </div>
-                </div>
-
-                <div id="adm-tab-paket" class="hidden">
-                    <div class="flex" style="justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <h1>Kelola Paket</h1>
-                        <button class="btn btn-primary">Tambah Paket</button>
-                    </div>
-                    <div class="card">
-                        <table>
-                            <thead><tr><th>Nama Paket</th><th>Harga</th><th>Status</th><th>Aksi</th></tr></thead>
-                            <tbody id="admin-table-paket">
-                                </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div id="adm-tab-flash" class="hidden">
-                    <h1 class="mb-6">Pengaturan Flash Sale</h1>
-                    <div class="card mb-6">
-                        <label>Status Flash Sale:</label>
-                        <select class="form-control mt-2"><option>Aktif</option><option>Non-Aktif</option></select>
-                        <div class="flex gap-4">
-                            <div style="flex:1"><label>Waktu Mulai:</label><input type="time" class="form-control mt-2"></div>
-                            <div style="flex:1"><label>Waktu Selesai:</label><input type="time" class="form-control mt-2"></div>
-                        </div>
-                        <button class="btn btn-primary mt-2">Simpan Pengaturan</button>
-                    </div>
-                    <div class="card">
-                        <h3 class="mb-4">Item Flash Sale</h3>
-                        <table>
-                            <tr><th>Nama Item</th><th>Harga Coret</th><th>Harga Diskon</th><th>Aksi</th></tr>
-                            <tr><td>Joki Epic to Legend</td><td>Rp 200.000</td><td>Rp 120.000</td><td><button class="btn btn-outline" style="color:#ff4757; border-color:#ff4757;">Hapus</button></td></tr>
-                            <tr><td>MCL Ticket + Joki</td><td>Rp 150.000</td><td>Rp 99.000</td><td><button class="btn btn-outline" style="color:#ff4757; border-color:#ff4757;">Hapus</button></td></tr>
-                        </table>
-                        <button class="btn btn-outline mt-4">+ Tambah Item</button>
-                    </div>
-                </div>
-
-                <div id="adm-tab-banner" class="hidden">
-                    <div class="flex" style="justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <h1>Kelola Banner Slider</h1>
-                        <button class="btn btn-primary">+ Tambah Banner</button>
-                    </div>
-                    <div class="grid grid-3 gap-4">
-                        <div class="card text-center"><img src="https://via.placeholder.com/300x150/1a1a2e/7c3aed?text=Banner+1" style="width:100%; border-radius:8px; margin-bottom:10px;"><button class="btn btn-outline" style="color:#ff4757; border-color:#ff4757; width:100%;">Hapus</button></div>
-                        <div class="card text-center"><img src="https://via.placeholder.com/300x150/1a1a2e/7c3aed?text=Banner+2" style="width:100%; border-radius:8px; margin-bottom:10px;"><button class="btn btn-outline" style="color:#ff4757; border-color:#ff4757; width:100%;">Hapus</button></div>
-                        <div class="card text-center"><img src="https://via.placeholder.com/300x150/1a1a2e/7c3aed?text=Banner+3" style="width:100%; border-radius:8px; margin-bottom:10px;"><button class="btn btn-outline" style="color:#ff4757; border-color:#ff4757; width:100%;">Hapus</button></div>
-                    </div>
-                </div>
-
-                <div id="adm-tab-faq" class="hidden">
-                    <div class="flex" style="justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <h1>Kelola FAQ</h1>
-                        <button class="btn btn-primary">+ Tambah FAQ</button>
-                    </div>
-                    <div class="card">
-                        <table>
-                            <tr><th>Pertanyaan</th><th>Jawaban</th><th>Aksi</th></tr>
-                            <tr><td>Apakah aman?</td><td>Ya, 100% aman tanpa cheat.</td><td><button class="btn btn-outline" style="padding: 5px 10px;">Edit</button></td></tr>
-                            <tr><td>Berapa lama prosesnya?</td><td>Estimasi 1-3 hari sesuai tier.</td><td><button class="btn btn-outline" style="padding: 5px 10px;">Edit</button></td></tr>
-                        </table>
-                    </div>
-                </div>
-
-                <div id="adm-tab-wa" class="hidden">
-                    <h1 class="mb-6">Template Pesan WhatsApp Otomatis</h1>
-                    <div class="card">
-                        <label>Format Pesan Invoice:</label>
-                        <textarea class="form-control mt-2" rows="8">Halo Admin Naufal Studio Games!
-Saya ingin konfirmasi pembayaran order joki saya.
-Order ID: [ORDER_ID]
-Paket: [PAKET]
-Metode Bayar: [PAYMENT]
-
-Mohon segera diproses ya min!</textarea>
-                        <button class="btn btn-primary mt-4">Simpan Template</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div id="popup-success" class="popup-overlay hidden">
-        <div class="popup-content">
-            <div style="font-size: 4rem; color: #2ecc71; margin-bottom: 10px;">✓</div>
-            <h2 class="mb-2">Order Berhasil!</h2>
-            <p class="text-muted mb-4">Silakan selesaikan pembayaran dan hubungi admin.</p>
-            <div style="background: rgba(0,0,0,0.5); padding: 10px; border-radius: 8px; margin-bottom: 20px;">
-                ID Order Anda: <br>
-                <strong id="popup-order-id" class="text-primary" style="font-size: 1.2rem;">NSG-XXXX</strong>
-            </div>
-            <button class="btn btn-primary" style="width: 100%;" onclick="closePopup()">Selesai & Ke Home</button>
-        </div>
-    </div>
-
-    <script>
-        // --- DATA HARDCODE ---
-        const packagesData = [
-            { name: 'Perpaket', price: 150000, img: 'https://via.placeholder.com/300x150/1a1a2e/7c3aed?text=Perpaket' },
-            { name: 'Classic Up WR', price: 200000, img: 'https://via.placeholder.com/300x150/1a1a2e/7c3aed?text=Classic+Up+WR' },
-            { name: 'Perbintang', price: 50000, img: 'https://via.placeholder.com/300x150/1a1a2e/7c3aed?text=Perbintang' },
-            { name: 'MCL', price: 500000, img: 'https://via.placeholder.com/300x150/1a1a2e/7c3aed?text=MCL' }
-        ];
-
-        const flashSaleData = [
-            { name: 'Joki Epic ke Legend', price: 200000, discount: 120000 },
-            { name: 'Paket MCL Mingguan', price: 150000, discount: 99000 },
-            { name: 'Mythic Grading 10x', price: 250000, discount: 150000 }
-        ];
-
-        // --- FORMATTER ---
-        const formatRp = (angka) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
-
-        // --- RENDER DATA ---
-        function renderHome() {
-            // Packages
-            const pkgContainer = document.getElementById('package-container');
-            pkgContainer.innerHTML = '';
-            packagesData.forEach(p => {
-                pkgContainer.innerHTML += `
-                    <div class="card text-center" style="padding:0; overflow:hidden;">
-                        <img src="${p.img}" style="width:100%; display:block;">
-                        <div style="padding: 20px;">
-                            <h3 class="mb-2">${p.name}</h3>
-                            <p class="text-primary mb-4" style="font-weight:bold; font-size:1.2rem;">${formatRp(p.price)}</p>
-                            <button class="btn btn-outline" style="width:100%;" onclick="showPage('order')">Order Sekarang</button>
-                        </div>
-                    </div>
-                `;
-            });
-
-            // Flash Sale
-            const fsContainer = document.getElementById('flash-sale-container');
-            fsContainer.innerHTML = '';
-            flashSaleData.forEach(fs => {
-                fsContainer.innerHTML += `
-                    <div class="card text-center" style="position:relative; background:rgba(0,0,0,0.4);">
-                        <span class="badge-sale">SALE</span>
-                        <h3 class="mb-2">${fs.name}</h3>
-                        <p style="text-decoration: line-through; color: var(--text-muted); font-size: 0.9rem;">${formatRp(fs.price)}</p>
-                        <p class="text-primary mb-4" style="font-weight:bold; font-size:1.3rem;">${formatRp(fs.discount)}</p>
-                        <button class="btn btn-primary" style="width:100%; padding: 8px;" onclick="showPage('order')">Sikat Promo</button>
-                    </div>
-                `;
-            });
-        }
-
-        // --- SPA NAVIGATION ---
-        function showPage(pageId) {
-            // Hide all pages & admin views
-            document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
-            document.getElementById('admin-login-page').classList.add('hidden');
-            document.getElementById('admin-dashboard-page').classList.add('hidden');
-            
-            // Handle Navbar & Footer visibility
-            if(pageId === 'home' || pageId === 'order' || pageId === 'kalkulator' || pageId === 'cek-order' || pageId === 'panduan' || pageId === 'syarat') {
-                document.getElementById('navbar').classList.remove('hidden');
-                document.getElementById('footer').classList.remove('hidden');
-                document.getElementById('page-' + pageId).classList.remove('hidden');
-            }
-            
-            window.scrollTo(0, 0);
-
-            // Resets
-            if(pageId === 'order') resetOrderForm();
-        }
-
-        // --- ORDER WIZARD LOGIC ---
-        function setOrderOpt(type, element) {
-            document.querySelectorAll(`.${type}-opt`).forEach(el => el.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        function nextStep(step) {
-            document.querySelectorAll('[id^="order-step-"]').forEach(el => el.classList.add('hidden'));
-            document.getElementById('order-step-' + step).classList.remove('hidden');
-            
-            document.querySelectorAll('.step-circle').forEach((el, index) => {
-                if(index < step) el.classList.add('active');
-                else el.classList.remove('active');
-            });
-        }
-
-        function resetOrderForm() {
-            nextStep(1);
-            document.querySelectorAll('.select-box').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('input').forEach(el => el.value = '');
-        }
-
-        function submitOrder() {
-            const randomID = 'NSG-' + Math.floor(1000 + Math.random() * 9000);
-            document.getElementById('popup-order-id').innerText = randomID;
-            document.getElementById('popup-success').classList.remove('hidden');
-        }
-
-        function closePopup() {
-            document.getElementById('popup-success').classList.add('hidden');
-            showPage('home');
-        }
-
-        // --- KALKULATOR WR ---
-        function hitungWR() {
-            const match = parseFloat(document.getElementById('calc-match').value);
-            const wrNow = parseFloat(document.getElementById('calc-wr').value);
-            const wrTarget = parseFloat(document.getElementById('calc-target').value);
-            const resBox = document.getElementById('calc-result');
-
-            if(!match || !wrNow || !wrTarget) return alert("Isi semua form!");
-            if(wrTarget >= 100) return alert("Target tidak bisa 100% atau lebih!");
-
-            const currentWin = match * (wrNow / 100);
-            const x = ((wrTarget * match) - (100 * currentWin)) / (100 - wrTarget);
-            
-            resBox.classList.remove('hidden');
-            if(x <= 0) {
-                resBox.innerText = "Target WR sudah tercapai!";
-            } else {
-                resBox.innerHTML = `Kamu harus <strong>menang ${Math.ceil(x)} match tanpa kalah</strong> untuk mencapai WR ${wrTarget}%`;
-            }
-        }
-
-        // --- CEK ORDER ---
-        function cekStatusOrder() {
-            const inputId = document.getElementById('cek-id').value.toUpperCase();
-            const resBox = document.getElementById('cek-result');
-            resBox.classList.remove('hidden');
-
-            if(inputId === 'NSG-0001') {
-                resBox.innerHTML = `
-                    <p class="mb-2"><strong>Paket:</strong> Perpaket Legend to Mythic</p>
-                    <p class="mb-2"><strong>Status:</strong> <span style="color: #f39c12; font-weight: bold;">Sedang Diproses</span></p>
-                    <p><strong>Estimasi Selesai:</strong> 24 Jam kedepan.</p>
-                `;
-            } else {
-                resBox.innerHTML = `<p style="color: #ff4757;">Order ID tidak ditemukan atau pembayaran belum dikonfirmasi.</p>`;
-            }
-        }
-
-        // --- FLASH SALE TIMER (24 Jam Loop dummy) ---
-        let totalSeconds = 24 * 3600;
-        setInterval(() => {
-            totalSeconds--;
-            let h = Math.floor(totalSeconds / 3600);
-            let m = Math.floor((totalSeconds % 3600) / 60);
-            let s = totalSeconds % 60;
-            if(document.getElementById('timer')) {
-                document.getElementById('timer').innerText = 
-                    `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-            }
-            if(totalSeconds <= 0) totalSeconds = 24 * 3600;
-        }, 1000);
-
-        // --- ADMIN PANEL LOGIC ---
-        function showAdminLogin() {
-            document.getElementById('navbar').classList.add('hidden');
-            document.getElementById('footer').classList.add('hidden');
-            document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
-            document.getElementById('admin-login-page').classList.remove('hidden');
-        }
-
-        function doAdminLogin() {
-            const u = document.getElementById('adm-user').value;
-            const p = document.getElementById('adm-pass').value;
-            if(u === 'admin' && p === 'admin123') {
-                document.getElementById('admin-login-page').classList.add('hidden');
-                document.getElementById('admin-dashboard-page').classList.remove('hidden');
-                document.getElementById('adm-err').classList.add('hidden');
-                renderAdminPaket();
-            } else {
-                document.getElementById('adm-err').classList.remove('hidden');
-            }
-        }
-
-        function switchAdminTab(tab) {
-            document.querySelectorAll('[id^="adm-tab-"]').forEach(el => el.classList.add('hidden'));
-            document.getElementById('adm-tab-' + tab).classList.remove('hidden');
-        }
-
-        function renderAdminPaket() {
-            const tbody = document.getElementById('admin-table-paket');
-            tbody.innerHTML = '';
-            packagesData.forEach(p => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${p.name}</td>
-                        <td>${formatRp(p.price)}</td>
-                        <td><span style="color:#2ecc71;">Aktif</span></td>
-                        <td>
-                            <button class="btn btn-outline" style="padding: 5px 10px; margin-right: 5px;">Edit</button>
-                            <button class="btn btn-outline" style="padding: 5px 10px; color:#ff4757; border-color:#ff4757;">Hapus</button>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
-
-        function adminLogout() {
-            showPage('home');
-            document.getElementById('adm-user').value = '';
-            document.getElementById('adm-pass').value = '';
-        }
-
-        // Init
-        renderHome();
-        showPage('home');
-
-    </script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
