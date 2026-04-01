@@ -38,17 +38,31 @@
 
         <div id="content" class="main-content">
             
-            <div id="tab-dashboard" class="tab-content active">
-                <h2>Dashboard Overview</h2>
-                <div class="stat-grid">
-                    <div class="stat-card"><h3>Total Order</h3><div class="value">150</div></div>
-                    <div class="stat-card"><h3>Pending</h3><div class="value">12</div></div>
-                    <div class="stat-card"><h3>Selesai</h3><div class="value">138</div></div>
-                    <div class="stat-card"><h3>Pendapatan</h3><div class="value">Rp 45.750k</div></div>
+            <div id="tab-dashboard" class="tab-content active" style="text-align: left;">
+                <h2 style="text-align: left; margin-bottom: 15px; font-size: 1.3rem;">Dashboard Overview</h2>
+                
+                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; align-items: flex-start;">
+                    <div class="stat-card" style="width: 220px; height: 90px; padding: 12px 15px; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; text-align: left; margin: 0;">
+                        <h3 style="font-size: 0.75rem; margin: 0 0 5px 0; color: #a1a1aa; text-transform: uppercase;">Total Order</h3>
+                        <div class="value" style="font-size: 1.2rem; font-weight: bold; color: var(--primary-purple);">150</div>
+                    </div>
+                    <div class="stat-card" style="width: 220px; height: 90px; padding: 12px 15px; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; text-align: left; margin: 0;">
+                        <h3 style="font-size: 0.75rem; margin: 0 0 5px 0; color: #a1a1aa; text-transform: uppercase;">Pending</h3>
+                        <div class="value" style="font-size: 1.2rem; font-weight: bold; color: #f97316;">12</div>
+                    </div>
+                    <div class="stat-card" style="width: 220px; height: 90px; padding: 12px 15px; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; text-align: left; margin: 0;">
+                        <h3 style="font-size: 0.75rem; margin: 0 0 5px 0; color: #a1a1aa; text-transform: uppercase;">Selesai</h3>
+                        <div class="value" style="font-size: 1.2rem; font-weight: bold; color: #16a34a;">138</div>
+                    </div>
+                    <div class="stat-card" style="width: 220px; height: 90px; padding: 12px 15px; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; text-align: left; margin: 0;">
+                        <h3 style="font-size: 0.75rem; margin: 0 0 5px 0; color: #a1a1aa; text-transform: uppercase;">Pendapatan</h3>
+                        <div class="value" style="font-size: 1.2rem; font-weight: bold; color: var(--primary-purple);">Rp 45.750k</div>
+                    </div>
                 </div>
-                <h3>Order Terbaru</h3>
-                <div class="card-container">
-                    <table>
+
+                <h3 style="text-align: left; font-size: 1rem; margin-bottom: 10px; color: #ffffff;">Order Terbaru</h3>
+                <div class="card-container" style="max-width: 600px; overflow-x: auto; margin: 0; padding: 0;">
+                    <table style="width: 100%; font-size: 0.85rem; margin: 0;">
                         <thead><tr><th>ID Order</th><th>Nama</th><th>Paket</th><th>Harga</th><th>Status</th></tr></thead>
                         <tbody id="dashboard-table"></tbody>
                     </table>
